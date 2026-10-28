@@ -203,7 +203,7 @@ navBtn(homeBtn, 'index.html', true);
 navBtn(experienceBtn, "experience-section");
 navBtn(projectsBtn, "projects-section");
 navBtn(blogsBtn, 'blogs.html', true);
-navBtn(project1, 'project-1.html', true);
+navBtn(project1, 'overview.html', true);
 navBtn(catcafe, 'project-1.html', true);
 navBtn(chaum, 'project-2.html', true);
 navBtn(overview, 'overview.html', true);
