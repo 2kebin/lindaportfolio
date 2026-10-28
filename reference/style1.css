@@ -1,0 +1,26 @@
+body{
+    background-image: url("https://cdn.britannica.com/13/234213-050-45F47984/dachshund-dog.jpg");
+}
+
+.header{
+    box-shadow: -4px 8px 6px darkblue;
+    border: 4px dashed rgb(0, 94, 138);
+    background: linear-gradient(rgb(220, 240, 245), rgb(52, 70, 134));
+    position:relative;
+    margin: auto;
+}
+
+#buttons button {
+    background-color: green;
+}
+
+#buttons button:hover {
+    background-color: red;
+}
+
+#table_data a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 2em;
+    color: rgb(0, 191, 255);
+    text-decoration: none;
+}

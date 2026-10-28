@@ -1,0 +1,767 @@
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes bounce-up {
+    from { transform: translateY(50px); }
+    to { transform: translateY(0); }
+}
+
+@font-face {
+    font-family: "quicking";
+    src: url("fonts/QuickingRegular-gw5KY.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "jpal";
+    src: url("fonts/Jpal10demoRegular-yYR8q.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background-color: rgb(254,246,243);
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Phone view: scale the complete desktop composition as one artboard.
+   `zoom` keeps document height, scrolling, and the fixed navigation in the
+   same coordinate system, avoiding text reflow or cropped navigation. */
+body.scaled-phone {
+    width: 1440px;
+    min-width: 1440px;
+    zoom: var(--page-scale);
+}
+
+body.scaled-phone .top {
+    width: 1440px;
+}
+
+#experience-section,
+#projects-section,
+#mywork-section {
+    scroll-margin-top: 120px;
+}
+
+/* Freeze every viewport-based desktop measurement before the canvas is
+   scaled. Percentages now resolve against the fixed 1440px canvas, and these
+   overrides remove the remaining viewport units that could otherwise make
+   text, gaps, or images change independently of the body scale. */
+body.scaled-phone .hero {
+    gap: 60px;
+    padding: 200px 80px 120px;
+}
+
+body.scaled-phone .hero-text h1 { font-size: 3.5rem; }
+body.scaled-phone .hero-text p { font-size: 1.8rem; }
+
+body.scaled-phone .project {
+    gap: 100px;
+    padding: 0 80px;
+}
+
+body.scaled-phone .project-btn::before { font-size: 20px; }
+
+body.scaled-phone .bottom {
+    gap: 50px;
+    padding: 0 80px;
+}
+
+body.scaled-phone .project-desc h2 { font-size: 2rem; }
+body.scaled-phone .project-desc p { font-size: 1.3rem; }
+body.scaled-phone .headertitle { font-size: 3.5em; }
+
+body.scaled-phone .freetime-content img {
+    height: 450px;
+}
+
+body.scaled-phone .post p { font-size: 1.5rem; }
+
+body.scaled-phone .blogs,
+body.scaled-phone .projectpage {
+    min-height: 900px;
+}
+
+body *:not(.top):not(.empty):not(.top *):not(.empty *) {
+    opacity: 0;
+}
+
+.fade-in {
+    animation: fade-in 0.5s ease-out both;
+}
+
+.fade-out {
+    animation: fade-out 0.5s ease-in forwards;
+}
+
+.fade-bounce {
+    animation: fade-in 0.6s ease-out both, bounce-up 0.6s ease-out backwards;
+}
+
+.empty {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+}
+
+/* ---------- Top bar ---------- */
+
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.topbar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 10px;
+    background-color: hsl(40, 100%, 99%);
+}
+
+.topbar button {
+    padding: 8px;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: "jpal", sans-serif;
+    border-radius: 10px;
+    border-width: 0px;
+    cursor: pointer;
+    color: rgb(104, 96, 96);
+    transition: color 0.5s ease-in-out;
+}
+
+.linkedin {
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+    border-radius: 0;
+    background-image: url("images/linkedin.png");
+    background-size: 200%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    cursor: pointer;
+     border-radius: 10px;
+    border-width: 0px;
+    cursor: pointer;
+}
+
+.topbar button:hover {
+    color: black;
+}
+
+.no-transition {
+    transition: none !important;
+}
+
+.fade {
+    height: 50px;
+    background: linear-gradient(hsl(40, 100%, 99%), transparent);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    gap: clamp(24px, 4vw, 60px);
+    padding: clamp(130px, 14vw, 200px) clamp(20px, 5vw, 80px) clamp(70px, 8vw, 120px);
+    box-sizing: border-box;
+}
+
+.hero img:not(.hero-photo) {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 100px;
+    width: 85px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.hero-photo {
+    flex: 0 1 360px;
+    min-width: 100px;
+    height: auto;
+    border-radius: 15px;
+    mask-image: linear-gradient(to top, black 95%, transparent 100%);
+}
+
+.hero-text {
+    flex: 1 1 360px;
+    max-width: 500px;
+    margin-left: 0;
+    text-align: center;
+    line-height: 40px;
+    
+}
+
+.hero-text h1 {
+    font-family: 'Schoolbell', cursive;
+    font-weight: 100;
+    color: rgb(163,59,74);
+    margin: 0;
+    font-size: clamp(1rem, 4vw, 3.5rem);
+    letter-spacing: 5px;
+    padding-bottom: 20px;
+}
+
+.hero-text p {
+    font-family: "Noto Sans JP", sans-serif;
+    color: rgb(206,149,66);
+    font-weight: 600;
+    margin: 0 0 1em;
+    font-size: clamp(1rem, 2vw, 1.8rem);
+}
+
+/* ---------- Top projects ---------- */
+
+.top-projects {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(transparent 0%, rgb(119,44,55) 1%, rgb(119,44,55) 99%, transparent 100%);
+    padding-bottom: 180px;
+}
+
+.top-projects h1, .top-projects h2:not(.headertitle) {
+    font-weight: 400;
+    padding-top: 50px;
+    text-align: center;
+    font-family: "IBM Plex Serif", sans-serif;
+    letter-spacing: -1px;
+    color: rgb(255, 213, 161);
+}
+
+.project-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 140px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.project {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(30px, 7vw, 100px);
+    padding: 0 clamp(16px, 5vw, 80px);
+    margin-right: 0;
+    width: 100%;
+    max-width: 1400px;
+    box-sizing: border-box;
+}
+
+.project-btn {
+    position: relative;
+    flex: 0 0 600px;
+    width: 600px;
+    max-width: 100%;
+    height: 340px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 10px;
+    -webkit-box-reflect: below 10px linear-gradient(transparent 67%, #0005 100%);
+}
+
+.project-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    border-radius: inherit;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+/*
+.project-btn:hover::after {
+    opacity: 0.4;
+}
+
+
+.project:has(.project-btn:hover) .project-desc {
+    filter: opacity(0);
+}
+*/
+.project-btn::before {
+    content: attr(data-hover);
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: clamp(8px, 2vw, 20px);
+    overflow-wrap: anywhere;
+    overflow: hidden;
+    color: transparent;
+    transition: color 0.5s ease;
+    pointer-events: none;
+}
+
+.project-btn:hover::before {
+    color: white;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(20px, 4vw, 50px);
+    padding: 0 clamp(16px, 5vw, 80px);
+}
+
+.bottom img {
+    flex: 0 1 600px;
+    width: min(600px, 100%);
+    min-width: 0;
+    height: auto;
+}
+
+.project-desc {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: left;
+    font-family: "Noto Sans JP", sans-serif;
+    transition: filter 0.5s ease-in-out;
+}
+
+.project-desc h2 {
+    margin: 0 0 10px;
+    text-align: auto;
+    font-size: clamp(1.2rem, 2.5vw, 2rem);
+    letter-spacing: 2px;
+    font-weight: 400;
+    color: rgb(255, 213, 161);
+}
+
+.headertitle {
+    position: relative;
+    bottom: -30px;
+    line-height: 0px;
+    text-wrap: nowrap;
+    font-size: clamp(1.8em, 6vw, 3.5em);
+    font-family: 'Schoolbell', sans-serif;
+    font-weight: 400;
+    color: rgb(255, 213, 161);
+
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 5%;
+}
+
+.project-desc p {
+    margin: 0;
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+    line-height: 1.5;
+    color: white;
+}
+
+#overview {
+    border: none;
+    border-radius: 30px;
+    position: relative;
+    margin-left: 10%;
+    font-family: "Noto Sans JP";
+    font-size: 1.5em;
+    color: white;
+    text-decoration: underline;
+    background-color: hsl(351, 46%, 42%);
+    padding: 10px;
+    top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#overview:hover {
+    background-color: hsl(351, 46%, 40%);
+}
+
+.project.reverse {
+    flex-direction: row-reverse;
+}
+
+/* ---------- Free time ---------- */
+
+.freetime {
+    position: relative;
+    z-index: 1;
+    margin-top: -60px;
+    background-color: white;
+    font-family: "jpal", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 120px 0;
+    padding-bottom: 250px;
+    color: rgb(163,59,74);
+    font-family: "Noto Sans JP";
+}
+
+.freetime p {
+    font-size: 1.5em;
+}
+
+.freetime-content {
+    position: relative;
+    padding-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.freetime-content img,
+.freetime-content video {
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.freetime-content img {
+    height: clamp(260px, 35vw, 450px);
+    width: min(30%, 450px);
+}
+
+.freetime-content video {
+    height: auto;
+    width: 23%;
+}
+
+.connect {
+    line-height: 10px;
+    padding-top: 160px;
+    margin-left: -20%;
+    width: auto;
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.connect h1 {
+    font-family: "Schoolbell";
+    font-weight: 1;
+}
+
+.mushroom-wrap {
+    position: relative;
+    z-index: 5;
+    width: 0;
+    height: 0;
+    overflow: visible;
+    left: 80%;   /* nudge right (negative = left) */
+    top: 100px;   /* nudge up (negative) or down (positive) */
+}
+
+.mushroom-wrap img {
+    display: block;
+    width: 350px;   /* must be px/em: a % would resolve against the 0-width wrapper */
+    height: auto;
+    max-width: none;
+}
+
+.blogs {
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;
+
+    width: min(45%, 900px);
+    min-height: 100vh;
+    height: auto;
+    box-sizing: border-box;
+
+    background-color: rgb(255, 249, 245);
+    padding: 130px;
+}
+
+.post {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 130%;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: rgb(255, 244, 232);
+    transition: background-color 0.3s ease;
+    border-radius: 30px;
+    border-width: 0;
+}
+
+.post:hover {
+    background-color: hwb(33 88% 0%);
+}
+
+.post img {
+    position: relative;
+    padding: 10px 0;
+    margin-left: 10px;
+    flex: 0 1 400px;
+    min-width: 100px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.post p {
+    margin-left: 5%;
+    width: 90%;
+    height: auto;
+    font-size: clamp(0.2rem, 4cqw, 1.5rem);
+    overflow-wrap: normal;
+}
+
+.projectpage {
+    font-family: "Noto Sans JP", sans-serif;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+
+    width: min(55%, 1100px);
+    min-height: 100vh;
+    height: auto;
+    box-sizing: border-box;
+
+    background-color: rgb(255, 249, 245);
+    padding: 100px;
+}
+
+.projectpage h1 {
+    font-size: 3em;
+}
+
+.projectpage p, .projectcenter p {
+    line-height: 30px;
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: lighter;
+}
+
+.projectpage img {
+    position: relative;
+    height: auto;
+}
+
+.projectpage video {
+    border-radius: 10px;
+    width: 49%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.image-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.double {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.imggroup{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    position: relative;
+    left: -15px;
+}
+
+.imggroup img{
+    width: 110%;
+    height: auto;
+}
+
+/* Applied by the JavaScript viewport controller above.  These rules make the
+   document behave like a responsive artboard rather than a fixed desktop page. */
+.compact-layout .topbar {
+    gap: 12px;
+}
+
+.compact-layout .topbar button {
+    font-size: 1.15rem;
+}
+
+.compact-layout .hero,
+.compact-layout .project,
+.compact-layout .project.reverse {
+    flex-direction: column;
+}
+
+.compact-layout .hero-text {
+    max-width: 680px;
+}
+
+.compact-layout .hero-photo {
+    width: min(360px, 80vw);
+}
+
+.compact-layout .project {
+    gap: 28px;
+}
+
+.compact-layout .project-btn {
+    flex-basis: auto;
+    width: min(600px, 100%);
+    height: clamp(210px, 55vw, 340px) !important;
+}
+
+.compact-layout .project-desc {
+    width: min(600px, 100%);
+}
+
+.compact-layout .headertitle {
+    line-height: 1.1;
+    margin: 30px auto 0;
+    padding: 0 16px;
+    text-wrap: wrap;
+    text-align: center;
+}
+
+.compact-layout .bottom {
+    flex-wrap: wrap;
+}
+
+.compact-layout .bottom img,
+.compact-layout .bottom .project-btn {
+    flex: 1 1 min(100%, 360px);
+}
+
+.compact-layout .freetime-content {
+    padding-left: 16px;
+    padding-right: 16px;
+    box-sizing: border-box;
+}
+
+.compact-layout .freetime-content img {
+    width: min(46%, 360px);
+    height: clamp(210px, 52vw, 360px);
+}
+
+.compact-layout .freetime-content video {
+    width: min(46%, 360px);
+}
+
+.compact-layout .blogs,
+.compact-layout .projectpage,
+.compact-layout .projectpage[style] {
+    width: min(100% - 32px, 720px) !important;
+    padding: 100px clamp(20px, 6vw, 60px) 50px !important;
+}
+
+.compact-layout .projectpage img,
+.compact-layout .projectpage img[style],
+.compact-layout .projectpage video {
+    max-width: 100%;
+}
+
+.compact-layout .image-row {
+    flex-wrap: wrap;
+}
+
+.compact-layout .imggroup {
+    left: 0;
+}
+
+.compact-layout .imggroup img {
+    width: 100%;
+}
+
+.phone-layout .topbar {
+    padding: 8px 4px;
+    gap: 2px;
+}
+
+.phone-layout .topbar button {
+    padding: 7px 5px;
+    font-size: .9rem;
+}
+
+.phone-layout .linkedin {
+    width: 34px;
+    height: 34px;
+}
+
+.phone-layout .hero-text {
+    line-height: 1.6;
+}
+
+.phone-layout .freetime-content img,
+.phone-layout .freetime-content video {
+    width: 100%;
+}
+
+/* Inline widths in the original content are useful on desktop, but they turn
+   paragraphs and cards into thin columns on a phone. Let each item use the
+   available line width instead of sharing it with another flex item. */
+.phone-layout .bottom {
+    flex-direction: column;
+}
+
+.phone-layout .bottom img,
+.phone-layout .bottom .project-btn {
+    flex: 0 0 auto;
+    width: min(100%, 360px);
+}
+
+.phone-layout .freetime > div[style*="width: 50%"] {
+    width: calc(100% - 48px) !important;
+}
+
+.phone-layout .freetime > div:not(.freetime-content)[style*="display: flex"] {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 0 !important;
+    width: calc(100% - 48px) !important;
+}
+
+.phone-layout .freetime > div:not(.freetime-content)[style*="display: flex"] > div {
+    width: 100% !important;
+    margin-left: 0 !important;
+}
+
+.phone-layout .connect {
+    margin-left: 0;
+    padding: 100px 24px 0;
+    align-self: stretch;
+}
+
+.phone-layout .mushroom-wrap img {
+    width: 200px;
+}
