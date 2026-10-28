@@ -294,11 +294,11 @@ body *:not(.top):not(.empty):not(.top *):not(.empty *) {
     transition: opacity 0.5s ease;
     pointer-events: none;
 }
-/*
+
 .project-btn:hover::after {
     opacity: 0.4;
 }
-
+/*
 
 .project:has(.project-btn:hover) .project-desc {
     filter: opacity(0);
